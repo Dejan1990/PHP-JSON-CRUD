@@ -1,12 +1,21 @@
 <?php
 
+include 'partials/header.php';
 require_once 'users/users.php';
+
+if (!isset($_GET['id'])) {
+    include 'partials/not_found.php';
+    exit;
+}
 
 $userId = $_GET['id'];
 
 $user = getUserById($userId);
 
-//var_dump($user);
+if (!$user) {
+    include 'partials/not_found.php';
+    exit;
+}
 
 ?>
 
@@ -34,3 +43,4 @@ $user = getUserById($userId);
         </tr>
     </tbody>
 </table>
+<?php include 'partials/footer.php'; ?>
