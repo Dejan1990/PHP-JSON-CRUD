@@ -3,8 +3,9 @@
 function getUsers() 
 {
     $users = json_decode(file_get_contents('./users/users.json'), true);
-    var_dump($users);
-    exit;
+    return $users;
+    //var_dump($users);
+    //exit;
 }
 
 function getUserById($id) 
