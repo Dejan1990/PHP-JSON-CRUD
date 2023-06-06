@@ -89,3 +89,50 @@ function putJson($users)
 {
     file_put_contents('users/users.json', json_encode($users, JSON_PRETTY_PRINT));
 }
+
+function validateUser($user, &$errors)
+{
+    $isValid = true;
+
+    if (!$user['name']) {
+        $isValid = false;
+        $errors['name'] = 'The user name is required';
+    }
+
+    if (!$user['username'] || strlen($user['username']) < 6 || strlen($user['username']) > 16) {
+        $isValid = false;
+        $errors['username'] = 'The user username is required and it must be between 6 and 16 characters';
+    }
+
+    if (!$user['email']) {
+        $isValid = false;
+        $errors['email'] = 'The user email is required';
+    }
+
+    if ($user['email'] && !filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+        $isValid = false;
+        $errors['email'] = 'This field must be a valid email';
+    }
+
+    if (!$user['phone']) {
+        $isValid = false;
+        $errors['phone'] = 'The user phone is required';
+    }
+
+    if ($user['phone'] && !filter_var($user['phone'], FILTER_VALIDATE_INT)) {
+        $isValid = false;
+        $errors['phone'] = 'This field must be a valid phone number';
+    }
+
+    if (!$user['website']) {
+        $isValid = false;
+        $errors['website'] = 'The user website is required';
+    }
+
+    if ($user['website'] && !filter_var($user['website'], FILTER_VALIDATE_URL)) {
+        $isValid = false;
+        $errors['website'] = 'This field must be a valid website url';
+    }
+
+    return $isValid;
+}

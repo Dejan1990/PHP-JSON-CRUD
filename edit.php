@@ -16,14 +16,25 @@ if (!$user) {
     exit;
 }
 
+$errors = [
+    'name' => '',
+    'username' => '',
+    'email' => '',
+    'phone' => '',
+    'website' => ''
+];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $user = updateUser($_POST, $userId);
+    $user = array_merge($user, $_POST);
 
-    if (isset($_FILES['picture'])) {
+    $isValid = validateUser($user, $errors);
+
+    if ($isValid) {
+        $user = updateUser($_POST, $userId);
         uploadImage($_FILES['picture'], $user);
-    }
-    header('Location: index.php');
+        header('Location: index.php');
+    }    
 }
 
 include 'partials/header.php';
