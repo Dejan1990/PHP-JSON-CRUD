@@ -26,7 +26,10 @@ if (!$user) {
         </div>
         <div class="card-body">
             <a href="edit.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-primary">Update</a>
-            <a href="delete.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-danger">Delete</a>
+            <form class="d-inline" action="delete.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
         </div>
         <table class="table">
             <tbody>

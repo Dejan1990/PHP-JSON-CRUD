@@ -2,12 +2,12 @@
 
 include 'users/users.php';
 
-if (!isset($_GET['id'])) {
+if (!isset($_POST['id'])) {
     include 'partials/not_found.php';
     exit;
 }
 
-$userId = $_GET['id'];
+$userId = $_POST['id'];
 deleteUser($userId);
 
 /*
