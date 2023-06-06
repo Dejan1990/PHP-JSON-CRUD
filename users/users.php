@@ -46,7 +46,23 @@ function updateUser($data, $id)
 
 function deleteUser($id) 
 {
+    $users = getUsers();
 
+    foreach ($users as $i => $user) {
+        if ($user['id'] == $id) {
+            /*
+            Remove the element from the array with unset() method or with array_splice()
+            heck this link to know the exact difference between these two
+            https://www.philipphoffmann.de/post/your-php-array-indices-getting-messed-up-when-unsetting-values/
+            */
+            // unset($users[$i]);
+            array_splice($users, $i, 1);
+        }
+    }
+
+    //var_dump($users);
+    //exit;
+    putJson($users);
 }
 
 function uploadImage($file, $user)
