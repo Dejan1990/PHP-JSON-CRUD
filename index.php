@@ -1,12 +1,15 @@
 <?php
 
 include 'partials/header.php';
-require_once 'users/users.php';
+include 'users/users.php';
 
 $users = getUsers();
 
 ?>
-<div class="container">
+<div class="container mt-5">
+    <p>
+        <a href="create.php" class="btn btn-success">Create new User</a>
+    </p>
     <table class="table">
         <thead>
             <tr>
@@ -24,7 +27,11 @@ $users = getUsers();
                 <tr>
                     <td>
                         <?php if (isset($user['extension'])) : ?>
-                            <img style="width: 60px;margin: 0px;" src="<?php echo "images/${user['id']}.${user['extension']}" ?>" alt="">
+                            <img 
+                                style="width: 60px;margin: 0px;" 
+                                src="<?php echo "users/images/${user['id']}.${user['extension']}" ?>" 
+                                alt=""
+                            >
                         <?php endif; ?>
                     </td>
                     <td><?php echo $user['name'] ?></td>
@@ -37,9 +44,9 @@ $users = getUsers();
                         </a>
                     </td>
                     <td>
-                        <a href="/php_json_crud/view.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-info">View</a>
-                        <a href="/php_json_crud/edit.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
-                        <a href="/php_json_crud/delete.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-danger">Delete</a>
+                        <a href="view.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-info">View</a>
+                        <a href="edit.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a href="delete.php?id=<?php echo $user['id'] ?>" class="btn btn-sm btn-outline-danger">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
